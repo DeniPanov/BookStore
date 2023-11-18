@@ -11,16 +11,4 @@ export class RegisterFormModel extends BaseFormModel<IRegisterModel> {
       password: ['', Validators.required, Validators.minLength(6)],
     })
   }
-
-  get username() {
-    return this.formGroup.get('username')
-  }
-
-  get email() {
-    return this.formGroup.get('email')
-  }
-
-  get password() {
-    return this.formGroup.get('password')
-  }
 }

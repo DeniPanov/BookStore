@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginFormModel } from '../../models/forms/logn.form-model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ILoginModel } from '../../models/login.model-interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +12,40 @@ import { LoginFormModel } from '../../models/forms/logn.form-model';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-   loginForm: LoginFormModel = new LoginFormModel()
+   formGroup: FormGroup
 
-  constructor() {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService) {
+    this.initForm()
   }
 
-  login() {
-    
+  public login(): void {
+    const username: string = this.formGroup.controls.username.value
+    const password: string = this.formGroup.controls.password.value
+
+    const model: ILoginModel = {
+      username: username,
+      password: password
+    }
+
+    this.authService.login(model).subscribe(data => {
+      console.log(data)
+    })
+  }
+
+  private initForm(): void {
+    this.formGroup = this.fb.group({
+      username: ["", Validators.required],
+      password: ["", Validators.required],
+    })
+  }
+
+  get username() {
+    return this.formGroup.get('username')
+  }
+
+  get password() {
+    return this.formGroup.get('password')
   }
 }

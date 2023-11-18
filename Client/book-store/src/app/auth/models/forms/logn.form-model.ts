@@ -6,16 +6,8 @@ export class LoginFormModel extends BaseFormModel<ILoginModel> {
   constructor() {
     super()
     this.formGroup = this.formBuilder.group({
-      username: ['', Validators.required, Validators.minLength(3)],
-      password: ['', Validators.required, Validators.minLength(6)],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     })
-  }
-
-  get username() {
-    return this.formGroup.get('username')
-  }
-
-  get password() {
-    return this.formGroup.get('password')
   }
 }

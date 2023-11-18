@@ -2,26 +2,23 @@
   <div class="row">
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
-      <form formGroup="loginForm.formGroup" (ngSubmit)="login()">
+      <form formGroup="formGroup" (ngSubmit)="login()">
         <div class="mb-3">
-          <label class="form-label" formControlName="username">Username</label>
-          <input type="text" class="form-control">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control" formControlName="username">
         </div>
-        <div *ngIf="username.touched && username.errors?.required" class="alert alert-danger">
-           This username is required!
-        </div>
-        <div *ngIf="username.touched && username.errors?.minLength" class="alert alert-danger">
-          The username should have at least 3 characters!
+        <div *ngIf="username.touched && username.errors?.['required']" class="alert alert-danger">
+          This username is required!
         </div>
         <div class="mb-3">
-          <label class="form-label" formControlName="password">Password</label>
-          <input type="password" class="form-control">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
         </div>
-        <div *ngIf="username.touched && password.errors?.required" class="alert alert-danger">
+        <div *ngIf="password.touched && password.errors?.['required']" class="alert alert-danger">
           This password is required!
         </div>
-        <div *ngIf="username.touched && password.errors?.minLength" class="alert alert-danger">
-          The password minimul length is 3 characters!
+        <div *ngIf="password.touched && password.errors?.['minLength']" class="alert alert-danger">
+          The password must be at least 3 characters long!
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
