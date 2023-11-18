@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
-      <form formGroup="formGroup" (ngSubmit)="login()">
+      <form [formGroup]="formGroup" (ngSubmit)="login()">
         <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" class="form-control" formControlName="username">
@@ -20,7 +20,7 @@
         <div *ngIf="password.touched && password.errors?.['minLength']" class="alert alert-danger">
           The password must be at least 3 characters long!
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" (click)="login()" class="btn btn-primary">Login</button>
       </form>
     </div>
     <div class="col-lg-4"></div>

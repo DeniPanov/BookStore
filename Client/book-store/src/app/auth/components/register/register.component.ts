@@ -1,27 +1,33 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RegisterFormModel } from '../../models/forms/register.form-model';
-import { IRegisterModel } from '../../models/register.model-interface';
-import { AuthService } from '../../services/auth.service';
+import { Component } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { IRegisterModel } from '../../models/register.model-interface'
+import { AuthService } from '../../services/auth.service'
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  providers: [AuthService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  registerForm: RegisterFormModel = new RegisterFormModel()
+  formGroup: FormGroup //= new RegisterFormModel()
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder) {
+      this.initForm()
+    }
 
   register() {
-    const username: string = this.registerForm.formGroup.controls.username.value
-    const email: string = this.registerForm.formGroup.controls.email.value
-    const password: string = this.registerForm.formGroup.controls.password.value
+    const username: string = this.formGroup.controls.username.value
+    const email: string = this.formGroup.controls.email.value
+    const password: string = this.formGroup.controls.password.value
 
-    const model:IRegisterModel = {
+    const model: IRegisterModel = {
       username: username,
       email: email,
       password: password,
@@ -32,15 +38,24 @@ export class RegisterComponent {
     })
   }
 
+  private initForm(): void {
+    this.formGroup = this.fb.group({
+      username: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required]],
+    })
+  }
+
   get username() {
-    return this.registerForm.formGroup.get('username')
+    console.log(this.formGroup.get('username'))
+    return this.formGroup.get('username')
   }
 
   get email() {
-    return this.registerForm.formGroup.get('email')
+    return this.formGroup.get('email')
   }
 
   get password() {
-    return this.registerForm.formGroup.get('password')
+    return this.formGroup.get('password')
   }
 }

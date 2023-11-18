@@ -6,17 +6,17 @@ import { ILoginModel } from '../models/login.model-interface';
 import { IRegisterModel } from '../models/register.model-interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private baseUrl = environment.apiUrl
   constructor(private http: HttpClient) { }
 
   login(model: ILoginModel): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, model)
+    return this.http.post(`${this.baseUrl}/identity/login`, model)
   }
 
   register(model: IRegisterModel): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, model)
+    return this.http.post(`${this.baseUrl}/identity/register`, model)
   }
 }

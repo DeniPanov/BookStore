@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
-      <form formGroup="registerForm.formGroup" (ngSubmit)="register()">
+      <form [formGroup]="formGroup" (ngSubmit)="register()">
         <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" class="form-control" formControlName="username">
@@ -15,7 +15,7 @@
           <label class="form-label">Password</label>
           <input type="password" class="form-control" formControlName="password">
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="button" (click)="register()" class="btn btn-primary">Register</button>
       </form>
     </div>
     <div class="col-lg-4"></div>
