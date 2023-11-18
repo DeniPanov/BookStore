@@ -3,18 +3,17 @@ import { CommonModule } from '@angular/common'
 import { IRegisterModel } from '../../models/register.model-interface'
 import { AuthService } from '../../services/auth.service'
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule],
   providers: [AuthService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  formGroup: FormGroup //= new RegisterFormModel()
+  formGroup: FormGroup
 
   constructor(
     private authService: AuthService,

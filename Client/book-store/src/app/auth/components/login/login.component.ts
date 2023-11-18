@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ILoginModel } from '../../models/login.model-interface';
-import { AuthService } from '../../services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { ILoginModel } from '../../models/login.model-interface'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
