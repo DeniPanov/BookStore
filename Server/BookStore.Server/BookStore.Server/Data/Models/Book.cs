@@ -20,7 +20,7 @@ namespace BookStore.Server.Data.Models
         [MaxLength(13)]
         public string ISBN { get; set; }
 
-        public string BookImage { get; set; }
+        public string? BookImage { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -32,13 +32,11 @@ namespace BookStore.Server.Data.Models
         [Required]
         public decimal Price { get; set; }
 
-        [MinLength(1)]
         public int PageCount { get; set; }
 
         [Required]
         public int Quantity { get; set; }
 
-        [MinLength(0)]
         public int PurchasesCount { get; set; }
 
         [Required]

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Data.Server.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20231119081122_AddBooksTable")]
+    [Migration("20231119102213_AddBooksTable")]
     partial class AddBooksTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,6 @@ namespace BookStore.Data.Server.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("BookImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")

@@ -3,6 +3,8 @@ using System;
 using BookStore.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
@@ -34,7 +36,6 @@ namespace BookStore.Data.Server.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("BookImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
