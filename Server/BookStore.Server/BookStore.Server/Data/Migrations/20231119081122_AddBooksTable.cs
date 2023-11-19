@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookStore.Server.Migrations
+namespace BookStore.Data.Server.Migrations
 {
     public partial class AddBooksTable : Migration
     {
