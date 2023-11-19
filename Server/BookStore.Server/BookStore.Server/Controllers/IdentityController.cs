@@ -45,7 +45,7 @@ namespace BookStore.Server.Controllers
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginRequestModel model)
+        public async Task<ActionResult<LoginTokenModel>> Login(LoginRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.UserName);
 
@@ -65,14 +65,20 @@ namespace BookStore.Server.Controllers
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id), 
+                    new Claim(ClaimTypes.Name, user.UserName),
+                }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var encryptedToken = tokenHandler.WriteToken(token);
 
-            return encryptedToken;
+            return new LoginTokenModel
+            {
+                Token = encryptedToken
+            };
         }
     }
 }
