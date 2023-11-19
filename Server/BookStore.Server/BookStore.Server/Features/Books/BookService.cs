@@ -1,5 +1,6 @@
 ﻿using BookStore.Server.Data;
 using BookStore.Server.Data.Models;
+using BookStore.Server.Data.Repositories;
 using BookStore.Server.Features.Books.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +8,11 @@ namespace BookStore.Server.Features.Books
 {
     public class BookService : IBookService
     {
-        private readonly BookStoreDbContext db;
+        private readonly IRepository<Book> bookRepo;
 
-        public BookService(BookStoreDbContext db)
+        public BookService(IRepository<Book> bookRepo)
         {
-            this.db = db;
+            this.bookRepo = bookRepo;
         }
         public async Task<ActionResult<int>> Create(CreateBookRequestModel model, string userId)
         {
@@ -28,9 +29,9 @@ namespace BookStore.Server.Features.Books
                 UserId = userId,
             };
 
-            db.Add(book);
+            this.bookRepo.Add(book);
 
-            await db.SaveChangesAsync();
+            await this.bookRepo.SaveAsync();
 
             return book.Id;
         }

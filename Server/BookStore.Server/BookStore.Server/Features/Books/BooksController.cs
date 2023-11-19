@@ -21,7 +21,7 @@ namespace BookStore.Server.Features.Books
         [Route(nameof(Create))]
         public async Task<ActionResult<int>> Create(CreateBookRequestModel model)
         {
-            var userId = User.GetId();
+            var userId = this.User.GetId();
 
             var bookId = await this.bookService.Create(model, userId);
 

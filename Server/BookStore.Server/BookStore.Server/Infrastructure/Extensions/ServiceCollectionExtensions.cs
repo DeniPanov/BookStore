@@ -1,5 +1,6 @@
 ﻿using BookStore.Server.Data;
 using BookStore.Server.Data.Models;
+using BookStore.Server.Data.Repositories;
 using BookStore.Server.Features.Books;
 using BookStore.Server.Features.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BookStore.Server.Infrastructure.Extensions
@@ -58,6 +58,7 @@ namespace BookStore.Server.Infrastructure.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped<IIdentityService, IdentityService>()
                 .AddScoped<IBookService, BookService>();
 
