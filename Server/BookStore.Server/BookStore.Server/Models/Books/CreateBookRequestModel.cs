@@ -1,34 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using static BookStore.Server.Data.Models.ValidationConstants.Book;
-
-namespace BookStore.Server.Data.Models
+namespace BookStore.Server.Models.Books
 {
-    public class Book
+    public class CreateBookRequestModel
     {
-        public int Id { get; set; }
-
         [Required]
-        [MaxLength(TitleMaxLength)]
+        [MaxLength(150)]
         public string Title { get; set; }
 
-        [MaxLength(DescriptionMaxLength)]
+        [MaxLength(2000)]
         public string Description { get; set; }
 
         [Required]
-        [MaxLength(SummaryMaxLength)]
+        [MaxLength(1000)]
         public string Summary { get; set; }
 
-        [MaxLength(ISBNMaxLength)]
+        [MaxLength(13)]
         public string ISBN { get; set; }
 
         public string? BookImage { get; set; }
 
         [Required]
-        [MaxLength(AuthorMaxLength)]
+        [MaxLength(100)]
         public string Author { get; set; }
 
-        [Range(MinYear, MaxYear)]
+        [Range(0, 2023)]
         public int Year { get; set; }
 
         [Required]
@@ -40,10 +36,5 @@ namespace BookStore.Server.Data.Models
         public int Quantity { get; set; }
 
         public int PurchasesCount { get; set; }
-
-        [Required]
-        public string UserId { get; set; }
-
-        public User User { get; set; }
     }
 }
