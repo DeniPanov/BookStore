@@ -10,5 +10,18 @@ namespace BookStore.Server.Data
             : base(options)
         {
         }
+
+        public DbSet<Book> Books { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Book>()
+                .HasOne(b => b.User)
+                .WithMany(u => u.Books)
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
+        }
     }
 }
