@@ -1,7 +1,7 @@
 ﻿using BookStore.Server.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Server.Infrastructure
+namespace BookStore.Server.Infrastructure.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
@@ -13,6 +13,17 @@ namespace BookStore.Server.Infrastructure
 
                 dbContext.Database.Migrate();
             }
+        }
+
+        public static IApplicationBuilder UseSwaggerUI(this IApplicationBuilder app)
+        {
+            return app
+                .UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Book Store API");
+                    options.RoutePrefix = string.Empty;
+                });
         }
     }
 }

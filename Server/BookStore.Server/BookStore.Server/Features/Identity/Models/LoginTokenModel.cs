@@ -1,4 +1,4 @@
-﻿namespace BookStore.Server.Models.Identity
+﻿namespace BookStore.Server.Features.Identity.Models
 {
     public class LoginTokenModel
     {

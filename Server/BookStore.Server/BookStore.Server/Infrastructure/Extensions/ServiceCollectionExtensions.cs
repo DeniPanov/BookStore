@@ -1,8 +1,13 @@
 ﻿using BookStore.Server.Data;
 using BookStore.Server.Data.Models;
+using BookStore.Server.Features.Books;
+using BookStore.Server.Features.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BookStore.Server.Infrastructure.Extensions
@@ -46,6 +51,33 @@ namespace BookStore.Server.Infrastructure.Extensions
                     ValidateAudience = false
                 };
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services
+                .AddScoped<IIdentityService, IdentityService>()
+                .AddScoped<IBookService, BookService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddDataBase(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("BookStoreConnection");
+
+            services.AddDbContext<BookStoreDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            return services;
+        }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Book Store API", Version = "v1"}));
 
             return services;
         }

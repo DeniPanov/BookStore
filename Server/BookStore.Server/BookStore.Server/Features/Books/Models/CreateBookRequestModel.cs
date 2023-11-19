@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Server.Models.Books
+namespace BookStore.Server.Features.Books.Models
 {
     public class CreateBookRequestModel
     {

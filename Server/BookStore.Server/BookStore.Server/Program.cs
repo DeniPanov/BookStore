@@ -1,18 +1,15 @@
-using BookStore.Server.Data;
-using BookStore.Server.Infrastructure;
 using BookStore.Server.Infrastructure.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("BookStoreConnection");
 var appSettings = builder.Services.GetAppSettings(builder.Configuration);
 
 builder.Services
-    .AddDbContext<BookStoreDbContext>(options =>
-        options.UseSqlServer(connectionString))
+    .AddDataBase(builder.Configuration)
     .AddIdentity()
     .AddJwtAuthentication(appSettings)
+    .AddApplicationServices()
+    .AddSwagger()
     .AddControllers();
 
 var app = builder.Build();
@@ -22,7 +19,9 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseRouting()
+app
+    .UseSwaggerUI()
+    .UseRouting()
     .UseCors(options =>
         {
             options

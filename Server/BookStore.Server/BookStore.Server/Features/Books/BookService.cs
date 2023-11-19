@@ -1,28 +1,20 @@
 ﻿using BookStore.Server.Data;
 using BookStore.Server.Data.Models;
-using BookStore.Server.Infrastructure.Extensions;
-using BookStore.Server.Models.Books;
-using Microsoft.AspNetCore.Authorization;
+using BookStore.Server.Features.Books.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookStore.Server.Controllers
+namespace BookStore.Server.Features.Books
 {
-    public class BooksController : ApiController
+    public class BookService : IBookService
     {
         private readonly BookStoreDbContext db;
 
-        public BooksController(BookStoreDbContext db)
+        public BookService(BookStoreDbContext db)
         {
             this.db = db;
         }
-
-        [Authorize]
-        [HttpPost]
-        [Route(nameof(Create))]
-        public async Task<ActionResult<int>> Create(CreateBookRequestModel model)
+        public async Task<ActionResult<int>> Create(CreateBookRequestModel model, string userId)
         {
-            var userId = this.User.GetId();
-
             var book = new Book
             {
                 Title = model.Title,
@@ -36,11 +28,11 @@ namespace BookStore.Server.Controllers
                 UserId = userId,
             };
 
-            this.db.Add(book);
+            db.Add(book);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-            return Created(nameof(this.Create), book.Id); 
+            return book.Id;
         }
     }
 }
