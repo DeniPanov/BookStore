@@ -46,7 +46,6 @@ export class RegisterComponent {
   }
 
   get username() {
-    console.log(this.formGroup.get('username'))
     return this.formGroup.get('username')
   }
 
