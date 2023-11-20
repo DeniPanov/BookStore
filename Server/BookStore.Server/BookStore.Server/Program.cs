@@ -10,7 +10,7 @@ builder.Services
     .AddJwtAuthentication(appSettings)
     .AddApplicationServices()
     .AddSwagger()
-    .AddControllers();
+    .AddApiControllers();
 
 var app = builder.Build();
 

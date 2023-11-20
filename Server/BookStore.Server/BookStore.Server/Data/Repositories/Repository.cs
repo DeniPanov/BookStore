@@ -44,12 +44,12 @@ namespace BookStore.Server.Data.Repositories
             this.entities.Remove(entity);
         }
 
-        public void Save()
+        public void SaveChanges()
         {
             this.context.SaveChanges();
         }
 
-        public async Task SaveAsync()
+        public async Task SaveChangesAsync()
         {
             await this.context.SaveChangesAsync();
         }

@@ -2,7 +2,7 @@
 
 namespace BookStore.Server.Features.Books.Models
 {
-    public class CreateBookRequestModel
+    public class CreateBookModel
     {
         [Required]
         [MaxLength(150)]

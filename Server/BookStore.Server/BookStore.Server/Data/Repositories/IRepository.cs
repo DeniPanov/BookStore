@@ -16,8 +16,8 @@ namespace BookStore.Server.Data.Repositories
 
         void Delete(T entity);
 
-        void Save();
+        void SaveChanges();
 
-        Task SaveAsync();
+        Task SaveChangesAsync();
     }
 }

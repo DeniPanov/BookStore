@@ -3,6 +3,7 @@ using BookStore.Server.Data.Models;
 using BookStore.Server.Data.Repositories;
 using BookStore.Server.Features.Books;
 using BookStore.Server.Features.Identity;
+using BookStore.Server.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -81,6 +82,12 @@ namespace BookStore.Server.Infrastructure.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Book Store API", Version = "v1"}));
 
             return services;
+        }
+
+        public static void AddApiControllers(this IServiceCollection services)
+        {
+            services
+                .AddControllers(options => options.Filters.Add<ModelOrNotFoundFilter>());
         }
     }
 }

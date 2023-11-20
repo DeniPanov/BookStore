@@ -5,6 +5,14 @@ namespace BookStore.Server.Features.Books
 {
     public interface IBookService
     {
-        Task<ActionResult<int>> Create(CreateBookRequestModel model, string userId);
+        Task<IEnumerable<BookLisitngModel>> GetAll();
+
+        Task<BookDetailsModel> Details(int id);
+
+        Task<ActionResult<int>> Create(CreateBookModel model, string userId);
+
+        Task<bool> Update(UpdateBookModel model);
+
+        Task Delete(int id);
     }
 }

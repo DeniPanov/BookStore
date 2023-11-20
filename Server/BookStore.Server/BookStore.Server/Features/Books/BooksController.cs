@@ -16,16 +16,53 @@ namespace BookStore.Server.Features.Books
             this.bookService = bookService;
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<BookLisitngModel>> GetAll()
+        {
+            var result = await this.bookService.GetAll();
+
+            return result;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<BookDetailsModel>> Details(int id)
+        {
+            var result = await this.bookService.Details(id);
+
+            return result;
+        }
         
         [HttpPost]
-        [Route(nameof(Create))]
-        public async Task<ActionResult<int>> Create(CreateBookRequestModel model)
+        public async Task<ActionResult<int>> Create(CreateBookModel model)
         {
             var userId = this.User.GetId();
 
             var bookId = await this.bookService.Create(model, userId);
 
             return Created(nameof(this.Create), bookId);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(UpdateBookModel model)
+        {
+            var result = await this.bookService.Update(model);
+
+            if (!result)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await this.bookService.Delete(id);
+
+            return Ok();
         }
     }
 }
