@@ -19,4 +19,12 @@ export class AuthService {
   register(model: IRegisterModel): Observable<any> {
     return this.http.post(`${this.baseUrl}/identity/register`, model)
   }
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+  
+  saveToken(token: string) {
+    localStorage.setItem('token', token)
+  }
 }

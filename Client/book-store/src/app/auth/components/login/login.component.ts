@@ -29,8 +29,9 @@ export class LoginComponent {
       password: password
     }
 
-    this.authService.login(model).subscribe(data => {
-      console.log(data)
+    this.authService.login(model).subscribe(token => {
+      this.authService.saveToken(token)
+      console.log(token)
     })
   }
 
