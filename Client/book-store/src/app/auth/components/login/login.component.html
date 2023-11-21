@@ -17,8 +17,8 @@
         <div *ngIf="password.touched && password.errors?.['required']" class="alert alert-danger">
           This password is required!
         </div>
-        <div *ngIf="password.touched && password.errors?.['minLength']" class="alert alert-danger">
-          The password must be at least 3 characters long!
+        <div *ngIf="password.touched && password.errors?.['minlength']" class="alert alert-danger">
+          The password must be at least 6 characters long!
         </div>
         <button type="button" (click)="login()" class="btn btn-primary">Login</button>
       </form>
