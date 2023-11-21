@@ -23,8 +23,14 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token')
   }
-  
+
   saveToken(token: string) {
     localStorage.setItem('token', token)
+  }
+
+  isAuthenticated() {
+    return this.getToken()
+      ? true
+      : false
   }
 }
