@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <form [formGroup]="formGroup" (ngSubmit)="create()">
+
+        <div class="row">
+          <div class="col-lg-12 mb-3">
+            <label class="form-label">Title *</label>
+            <input type="text" class="form-control" formControlName="title">
+
+            <div *ngIf="title.touched && title.errors?.['required']">
+              <br>
+
+              <div class="alert alert-danger">
+                The title is required!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-3">
+            <label class="form-label">Summary *</label>
+            <textarea class="form-control" rows="2" formControlName="summary"></textarea>
+
+            <div *ngIf="summary.touched && summary.errors?.['required']">
+              <br>
+
+              <div class="alert alert-danger">
+                The summary is required!
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" rows="2" formControlName="description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 mb-3">
+            <label class="form-label">Author *</label>
+            <input type="text" class="form-control" formControlName="author">
+
+            <div *ngIf="author.touched && author.errors?.['required']">
+              <br>
+
+              <div class="alert alert-danger">
+                The author is required!
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3">
+              <label class="form-label">ISBN</label>
+              <input type="text" class="form-control" formControlName="isbn">
+          </div>
+          <div class="col-lg-4 mb-3">
+              <label class="form-label">Book Image Url</label>
+              <input type="text" class="form-control" formControlName="bookImage">
+          </div>
+        </div>
+    
+        <div class="row">
+          <div class="col-lg-4 mb-3">
+            <label class="form-label">Price *</label>
+            <input type="number" class="form-control" formControlName="price">
+
+            <div *ngIf="price.touched && price.errors?.['required']">
+              <br>
+
+              <div class="alert alert-danger">
+                The price is required!
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3">
+            <label class="form-label">Quantity *</label>
+            <input type="number" class="form-control" formControlName="quantity">
+
+            <div *ngIf="quantity.touched && quantity.errors?.['required']">
+              <br>
+
+              <div class="alert alert-danger">
+                The quantity is required!
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3">
+              <label class="form-label">Year</label>
+              <input type="number" class="form-control" formControlName="year">
+          </div>
+        </div>
+    
+        <div class="row">
+          <div class="col-lg-6 mb-3">
+              <label class="form-label">Total pages</label>
+              <input type="number" class="form-control" formControlName="pageCount">
+          </div>
+          <div class="col-lg-6 mb-3">
+              <label class="form-label">Purchased amount</label>
+              <input type="number" class="form-control" formControlName="purchasesCount">
+          </div>
+        </div>
+    
+        <button type="button" (click)="create()" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
