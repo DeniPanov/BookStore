@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ILoginModel } from '../../models/login.model-interface'
 import { AuthService } from '../../services/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private router: Router) {
     this.initForm()
   }
 
@@ -31,6 +33,8 @@ export class LoginComponent {
 
     this.authService.login(model).subscribe(data => {
       this.authService.saveToken(data['token'])
+
+      this.router.navigate(['books'])
     })
   }
 

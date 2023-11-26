@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { IRegisterModel } from '../../models/register.model-interface'
 import { AuthService } from '../../services/auth.service'
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private fb: FormBuilder) {
       this.initForm()
     }
@@ -33,7 +35,7 @@ export class RegisterComponent {
     }
 
     this.authService.register(model).subscribe(data => {
-      console.log(data)
+      this.router.navigate(['login'])
     })
   }
 
