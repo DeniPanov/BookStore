@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { BookService } from '../../services/book.service'
 import { IListBooksModel } from '../../models/list-books.model-interface'
-import { Router } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 import { IDetailsBookModel } from '../../models/details-book.model-interface'
 
 @Component({
   selector: 'app-list-books',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+  ],
   providers: [],
   templateUrl: './list-books.component.html',
   // styleUrl: './list-books.component.css'
@@ -33,16 +36,17 @@ export class ListBooksComponent implements OnInit {
     this.bookService.getDetails(bookId).subscribe(book => {
       if (book) {
         this.currentBook = book
-        
       }
     })
   }
 
   delete(bookId: number) {
-    this.bookService.delete(bookId)
+    this.bookService.delete(bookId).subscribe(() => {
+      this.getBooks()
+    })
   }
 
-  navigateToDetails(bookId: number) {
-    this.router.navigate(['books', bookId ])
-  }
+  // navigateToDetails(bookId: number) {
+  //   this.router.navigate(['books', bookId ])
+  // }
 }

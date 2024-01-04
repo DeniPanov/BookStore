@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { BookService } from '../../services/book.service';
-import { IDetailsBookModel } from '../../models/details-book.model-interface';
+import { Component, OnInit } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { ActivatedRoute } from '@angular/router'
+import { BookService } from '../../services/book.service'
+import { IDetailsBookModel } from '../../models/details-book.model-interface'
 
 @Component({
   selector: 'app-details-book',
@@ -15,11 +15,11 @@ export class DetailsBookComponent implements OnInit {
   bookId: string
   book: IDetailsBookModel
 
-  constructor(private route: ActivatedRoute, bookService: BookService) {
-    route.params.subscribe(res => {
+  constructor(private route: ActivatedRoute, private bookService: BookService) {
+    this.route.params.subscribe(res => {
       this.bookId = res['id']
 
-      bookService.getDetails(+this.bookId).subscribe(book => {
+      this.bookService.getDetails(+this.bookId).subscribe(book => {
         this.book = book
       })
     })

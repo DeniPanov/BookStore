@@ -84,7 +84,6 @@ namespace BookStore.Server.Features.Books
             return book.Id;
         }
 
-
         public async Task<bool> Update(UpdateBookModel model)
         {
             var book = await this.bookRepo.All()

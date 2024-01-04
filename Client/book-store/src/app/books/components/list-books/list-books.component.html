@@ -8,7 +8,8 @@
             <h3 class="card-title">{{book.author}}: {{book.title}}</h3>
             <p class="card-text">{{book.summary}}</p>
             <p class="card-text">Price: {{book.price}}$ Quantity: {{book.quantity}}</p>
-            <a (click)="navigateToDetails(book.id)" class="btn btn-primary">Details</a>
+            <!-- <a (click)="navigateToDetails(book.id)" class="btn btn-primary">Details</a> -->
+            <a routerLink="/books/{{book.id}}" class="btn btn-primary">Details</a>
             <button class="btn btn-warning" (click)="update(book.id)">Update</button>
             <button class="btn btn-danger" (click)="delete(book.id)">Delete</button>
           </div>
