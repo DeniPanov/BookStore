@@ -1,14 +1,13 @@
 import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ICreateBookModel } from '../../models/create-book.model-interface'
 import { BookService } from '../../services/book.service'
-import { AuthGuard, AuthGuardService } from '../../../auth/services/auth-guard.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-create-book',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   providers: [],
   templateUrl: './create-book.component.html',
   styleUrl: './create-book.component.css'
@@ -19,15 +18,18 @@ export class CreateBookComponent {
 
   constructor(
     private bookService: BookService,
+    private router: Router,
     private fb: FormBuilder) {
       this.initForm()
     }
 
   create() {
-    const model: ICreateBookModel = this.mapModel()
+    const model: ICreateBookModel = this.formGroup.value
 
     this.bookService.create(model).subscribe(data => {
       this.bookId = data
+
+      this.router.navigate(['books'])
     })
   }
 
@@ -45,26 +47,6 @@ export class CreateBookComponent {
       pageCount: [0],
       purchasesCount: [0]
     })
-  }
-
-  private mapModel(): ICreateBookModel {
-    const controls = this.formGroup.controls
-
-    const model: ICreateBookModel = {
-      title: controls.title.value,
-      summary: controls.summary.value,
-      description: controls.description.value,
-      author: controls.author.value,
-      isbn: controls.isbn.value,
-      bookImage: controls.bookImage.value,
-      price: controls.price.value,
-      quantity: controls.quantity.value,
-      year: controls.year.value,
-      pageCount: controls.pageCount.value,
-      purchasesCount: controls.purchasesCount.value
-    }
-
-    return model
   }
 
   get title() {
