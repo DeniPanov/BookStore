@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ILoginModel } from '../../models/login.model-interface'
 import { AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private toastrService: ToastrService,
     private router: Router) {
     this.initForm()
   }
@@ -33,6 +35,7 @@ export class LoginComponent {
 
     this.authService.login(model).subscribe(data => {
       this.authService.saveToken(data['token'])
+      this.toastrService.success("You've logged in successfuly!")
 
       this.router.navigate(['books'])
     })

@@ -13,7 +13,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(ReactiveFormsModule),
     provideAnimations(),
-    provideToastr(),
+    provideToastr({
+      timeOut: 30000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     provideHttpClient(
       withFetch(),
       withInterceptors([ tokenInterceptor, errorInterceptor ]))
