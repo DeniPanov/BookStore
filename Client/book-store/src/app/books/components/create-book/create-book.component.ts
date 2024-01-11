@@ -27,7 +27,6 @@ export class CreateBookComponent {
     const model: ICreateBookModel = this.mapModel()
 
     this.bookService.create(model).subscribe(data => {
-      console.log(data)
       this.bookId = data
     })
   }

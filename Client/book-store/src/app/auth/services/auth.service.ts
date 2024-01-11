@@ -20,16 +20,16 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/identity/register`, model)
   }
 
-  getToken() {
-    return localStorage.getItem('token')
+  getToken(): string {
+    return localStorage?.getItem('token')
   }
 
-  saveToken(token: string) {
+  saveToken(token: string): void {
     localStorage.setItem('token', token)
   }
 
-  isAuthenticated() {
-    return this.getToken()
+  isAuthenticated(): boolean {
+    return !!this.getToken()
       ? true
       : false
   }

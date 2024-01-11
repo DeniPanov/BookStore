@@ -1,17 +1,21 @@
-import { ApplicationConfig } from '@angular/core'
+import { ApplicationConfig, importProvidersFrom } from '@angular/core'
 import { provideRouter } from '@angular/router'
-
 import { routes } from './app.routes'
-import { provideClientHydration } from '@angular/platform-browser'
-import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http'
 import { tokenInterceptor } from './auth/services/token-interceptor.service'
 import { errorInterceptor } from './auth/services/error-interceptor.service'
+import { provideAnimations } from '@angular/platform-browser/animations'
+import { provideToastr } from 'ngx-toastr'
+import { ReactiveFormsModule } from '@angular/forms'
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideClientHydration(),
+    importProvidersFrom(ReactiveFormsModule),
+    provideAnimations(),
+    provideToastr(),
     provideHttpClient(
+      withFetch(),
       withInterceptors([ tokenInterceptor, errorInterceptor ]))
     ]
 }
