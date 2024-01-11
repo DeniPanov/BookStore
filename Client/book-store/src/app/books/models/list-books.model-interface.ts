@@ -6,4 +6,9 @@ export interface IListBooksModel {
   author: string,
   price: number,
   quantity: number,
+  description: string,
+  isbn: string,
+  year: number,
+  pageCount: number,
+  purchasesCount: number
 }

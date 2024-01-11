@@ -14,5 +14,15 @@
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
+
+        public string Description { get; set; }
+
+        public string ISBN { get; set; }
+
+        public int Year { get; set; }
+
+        public int PageCount { get; set; }
+
+        public int PurchasesCount { get; set; }
     }
 }
